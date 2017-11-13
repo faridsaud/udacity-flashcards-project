@@ -6,6 +6,9 @@ import Deck from "./Deck";
 
 
 class DeckList extends Component {
+    static navigationOptions = {
+        title: 'Decks',
+    };
     getDeckList = () =>{
         const deckList = {
             React: {
@@ -46,7 +49,7 @@ class DeckList extends Component {
     };
 
     renderItem = ({item}) =>{
-        return <Deck title={item.title} questions={item.questions} id={item.title}/>
+        return <Deck title={item.title} questions={item.questions} id={item.title} navigation={this.props.navigation}/>
     };
     render() {
         const data = this.getDeckList();

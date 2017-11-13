@@ -1,7 +1,9 @@
-import {TabNavigator} from 'react-navigation';
+import {StackNavigator, TabNavigator} from 'react-navigation';
 import React, {Component} from 'react'
 import {StyleSheet, Text, View} from 'react-native';
 import DeckList from './DeckList'
+import Deck from "./Deck";
+import DeckDetail from "./DeckDetail";
 
 const Tabs = TabNavigator({
     Decks: {
@@ -12,11 +14,22 @@ const Tabs = TabNavigator({
     }
 });
 
+const Stack = StackNavigator({
+    Decks: {
+        screen: DeckList,
+    },
+    DeckDetail:{
+        screen: DeckDetail,
+    }
+
+});
+
+
 class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Tabs/>
+                <Stack/>
             </View>
         )
     }

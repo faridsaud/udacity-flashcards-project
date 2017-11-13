@@ -1,15 +1,22 @@
 import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import DeckDetail from "./DeckDetail";
+
+
 
 
 class Deck extends Component {
     render() {
+        const { navigate } = this.props.navigation;
+        console.log("Navigate object", navigate)
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{this.props.title}</Text>
-                <Text>{this.props.questions.length} cards</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigate('DeckDetail', { title: this.props.title, questions:this.props.questions})}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{this.props.title}</Text>
+                    <Text>{this.props.questions.length} cards</Text>
+                </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -23,9 +30,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: '#fff',
-        borderTopWidth:40,
-        borderBottomWidth:40,
-        minWidth:'100%'
+        borderTopWidth: 40,
+        borderBottomWidth: 40,
+        minWidth: '100%'
     },
     title: {
         fontSize: 24,
