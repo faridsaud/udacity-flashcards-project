@@ -34,6 +34,17 @@ class DeckList extends Component {
         return Object.values(deckList);
     };
 
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    backgroundColor: "#CED0CE",
+                }}
+            />
+        );
+    };
+
     renderItem = ({item}) =>{
         return <Deck title={item.title} questions={item.questions} id={item.title}/>
     };
@@ -41,7 +52,7 @@ class DeckList extends Component {
         const data = this.getDeckList();
         return (
             <View style={styles.container}>
-                <FlatList data={data} renderItem={this.renderItem} keyExtractor={(item, index) => index}/>
+                <FlatList style={styles.list} data={data} renderItem={this.renderItem} keyExtractor={(item, index) => index} ItemSeparatorComponent={this.renderSeparator}/>
             </View>
         )
     }
@@ -57,4 +68,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    list:{
+        flex: 1
+    }
 });

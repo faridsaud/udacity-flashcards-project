@@ -17,7 +17,6 @@ class Home extends Component {
         return (
             <View style={styles.container}>
                 <Tabs/>
-                <Text>Farid S</Text>
             </View>
         )
     }

@@ -7,7 +7,7 @@ class Deck extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>{this.props.title}</Text>
+                <Text style={styles.title}>{this.props.title}</Text>
                 <Text>{this.props.questions.length} cards</Text>
             </View>
         )
@@ -19,9 +19,16 @@ export default Deck
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignSelf: 'stretch',
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        borderColor: '#fff',
+        borderTopWidth:40,
+        borderBottomWidth:40,
+        minWidth:'100%'
     },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold'
+    }
 });
