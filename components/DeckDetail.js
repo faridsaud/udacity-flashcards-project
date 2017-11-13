@@ -13,6 +13,15 @@ class DeckDetail extends Component {
             title: `${navigation.state.params.title}`
         }
     };
+
+
+    onAddCardPress = () =>{
+        const { params } = this.props.navigation.state;
+        const { navigate } = this.props.navigation;
+        navigate('NewCard', {deck:params.title})
+    };
+
+
     render() {
         const { params } = this.props.navigation.state;
         return (
@@ -23,7 +32,7 @@ class DeckDetail extends Component {
                 </View>
 
                 <View>
-                    <TouchableOpacity style = {styles.addCardBtn}>
+                    <TouchableOpacity style = {styles.addCardBtn} onPress={this.onAddCardPress}>
                         <Text style = {styles.addCardTxt} >
                             Add Card
                         </Text>

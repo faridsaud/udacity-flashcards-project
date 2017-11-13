@@ -11,7 +11,6 @@ class NewDeck extends Component {
     };
 
     static navigationOptions = {
-        title: 'Decks',
         header: null
     };
 
@@ -24,22 +23,24 @@ class NewDeck extends Component {
         })
     };
 
-    onSubmit = () =>{
-        const { navigate } = this.props.navigation;
+    onSubmit = () => {
+        const {navigate} = this.props.navigation;
         navigate('Decks', {})
     };
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
-                <Text style={styles.title}>
-                    What's the title of your new deck?
-                </Text>
-                <TextInput style={styles.textInput} value={this.state.title} onChangeText={this.onTextInputChange}/>
-            </View>
+                    <Text style={styles.title}>
+                        What's the title of your new deck?
+                    </Text>
+                    <TextInput style={styles.textInput} value={this.state.title} onChangeText={this.onTextInputChange}
+                               placeholder="Enter the title of your new Deck"/>
+                </View>
                 <View>
-                    <TouchableOpacity style = {styles.submitBtn} onPress={this.onSubmit}>
-                        <Text style = {styles.submitTxt} >
+                    <TouchableOpacity style={styles.submitBtn} onPress={this.onSubmit}>
+                        <Text style={styles.submitTxt}>
                             Submit
                         </Text>
                     </TouchableOpacity>
@@ -76,16 +77,16 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5
     },
-    submitBtn:{
+    submitBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#000'
     },
-    submitTxt:{
+    submitTxt: {
         fontWeight: 'bold',
-        color:'#fff'
+        color: '#fff'
     }
 });
