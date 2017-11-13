@@ -9,7 +9,6 @@ import DeckDetail from "./DeckDetail";
 class Deck extends Component {
     render() {
         const { navigate } = this.props.navigation;
-        console.log("Navigate object", navigate)
         return (
             <TouchableOpacity onPress={() => navigate('DeckDetail', { title: this.props.title, questions:this.props.questions})}>
                 <View style={styles.container}>

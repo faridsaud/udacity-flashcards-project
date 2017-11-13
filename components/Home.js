@@ -4,19 +4,26 @@ import {StyleSheet, Text, View} from 'react-native';
 import DeckList from './DeckList'
 import Deck from "./Deck";
 import DeckDetail from "./DeckDetail";
+import NewDeck from "./NewDeck";
 
 const Tabs = TabNavigator({
-    Decks: {
+    Home: {
         screen: DeckList,
         navigationOptions: {
             tabBarLabel: 'Decks'
+        },
+    },
+    NewDeck:{
+        screen:NewDeck,
+        navigationOptions: {
+            tabBarLabel: 'New Deck'
         },
     }
 });
 
 const Stack = StackNavigator({
     Decks: {
-        screen: DeckList,
+        screen: Tabs,
     },
     DeckDetail:{
         screen: DeckDetail,

@@ -8,6 +8,7 @@ import Deck from "./Deck";
 class DeckList extends Component {
     static navigationOptions = {
         title: 'Decks',
+        header: null
     };
     getDeckList = () =>{
         const deckList = {
