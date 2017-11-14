@@ -7,86 +7,91 @@ import FlipCard from "react-native-flip-card";
 
 class Card extends Component {
 
-    static navigationOptions = ({ navigation })=>{
-        let title = "";
-        if(navigation.state.params.index){
-            title = `${navigation.state.params.index+1}/${navigation.state.params.questions.length}`
-        }else{
-            title = `1/${navigation.state.params.questions.length}`
-        }
+    static navigationOptions = ({navigation}) => {
         return {
-            title
+            title: 'Quiz'
         }
     };
 
     state = {
-        deck:null,
+        deck: null,
         questions: null,
         index: 0,
-        isFlipped:false
+        isFlipped: false,
+        finished:false
     };
 
-    componentDidMount(){
-        const { params } = this.props.navigation.state;
-        console.log('params',params);
-        console.log('state', this.state);
-        console.log('params.index',params.index);
-        let currentIndex = params.index?(params.index):this.state.index;
-        console.log('currentIndex',currentIndex);
-        this.setState((prevState)=>({
+    componentDidMount() {
+        const {params} = this.props.navigation.state;
+        this.setState((prevState) => ({
             ...prevState,
-            questions:params.questions,
-            index:currentIndex,
-            deck:params.deck
+            questions: params.questions,
+            deck: params.deck
         }));
+        console.log('state', this.state)
     };
 
-    onFlipPress = () =>{
-        this.setState(state=>(
+
+    onFlipPress = () => {
+        this.setState(state => (
             {
                 ...state,
-                isFlipped:!this.state.isFlipped
+                isFlipped: !this.state.isFlipped
             }
         ))
     };
 
-    onCorrectPress = () =>{
+    componentWillUpdate(nextProps, nextState) {
+        const {navigate} = nextProps.navigation;
+        console.log("nextProps", nextProps);
+        console.log("nextState", nextState);
+        if (nextState.finished) {
+            navigate('QuizReview', {questions: nextState.questions, deck: nextState.deck});
+            //persist result with redux
+        }
+    }
+
+    onCorrectPress = () => {
         let questions = this.state.questions;
         questions[this.state.index].optionSelected = 'correct';
-        const { navigate } = this.props.navigation;
-        if((this.state.index+1)<questions.length){
-            navigate('Quiz', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
-        }else{
-            navigate('QuizReview', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
-            //persist result with redux
-        }
-
-
+        console.log("OnCorrectPress");
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                questions,
+                index: ((prevState.index + 1) === questions.length) ? prevState.index : (prevState.index + 1),
+                finished:((prevState.index + 1) === questions.length)
+            }
+        });
+        console.log('state', this.state)
     };
 
-    onIncorrectPress = () =>{
+    onIncorrectPress = () => {
         let questions = this.state.questions;
         questions[this.state.index].optionSelected = 'incorrect';
-        const { navigate } = this.props.navigation;
-        if((this.state.index+1)<questions.length){
-            navigate('Quiz', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
-        }else{
-            navigate('QuizReview', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
-            //persist result with redux
-        }
+        console.log("OnIncorrectPress");
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                questions,
+                index: ((prevState.index + 1) === questions.length) ? prevState.index : (prevState.index + 1),
+                finished:((prevState.index + 1) === questions.length)
+            }
+        });
+        console.log('state', this.state)
     };
 
     render() {
-        const { params } = this.props.navigation.state;
+        const {params} = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
                     <FlipCard style={styles.flipCard} perspective={1000} clickable={false} flip={this.state.isFlipped}>
                         {/* Face Side */}
                         <View style={styles.container}>
-                            <Text  style={styles.question}>
+                            <Text style={styles.question}>
                                 {this.state.questions &&
-                                    this.state.questions[this.state.index].question
+                                this.state.questions[this.state.index].question
                                 }
                             </Text>
                         </View>
@@ -102,11 +107,11 @@ class Card extends Component {
                     <TouchableOpacity onPress={this.onFlipPress}>
                         {
                             this.state.isFlipped ? (
-                                <Text  style={styles.flipTextBtn}>
+                                <Text style={styles.flipTextBtn}>
                                     Question
                                 </Text>
-                            ):(
-                                <Text  style={styles.flipTextBtn}>
+                            ) : (
+                                <Text style={styles.flipTextBtn}>
                                     Answer
                                 </Text>
                             )
@@ -115,13 +120,13 @@ class Card extends Component {
                 </View>
 
                 <View>
-                    <TouchableOpacity style = {styles.correctBtn} onPress={this.onCorrectPress}>
-                        <Text style = {styles.correctTxt} >
+                    <TouchableOpacity style={styles.correctBtn} onPress={this.onCorrectPress}>
+                        <Text style={styles.correctTxt}>
                             Correct
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style = {styles.incorrectBtn} onPress={this.onIncorrectPress}>
-                        <Text  style = {styles.incorrectTxt}>
+                    <TouchableOpacity style={styles.incorrectBtn} onPress={this.onIncorrectPress}>
+                        <Text style={styles.incorrectTxt}>
                             Incorrect
                         </Text>
                     </TouchableOpacity>
@@ -163,33 +168,33 @@ const styles = StyleSheet.create({
     question: {
         fontSize: 24,
         fontWeight: 'bold',
-        textAlign:'center'
+        textAlign: 'center'
     },
     answer: {
         fontSize: 24,
         fontWeight: 'bold',
-        textAlign:'center'
+        textAlign: 'center'
     },
-    flipTextBtn:{
-        color:'#f00'
+    flipTextBtn: {
+        color: '#f00'
     },
-    correctBtn:{
+    correctBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#0a0',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#000',
         minWidth: '80%'
     },
-    correctTxt:{
+    correctTxt: {
         fontWeight: 'bold',
-        color:'#fff',
-        textAlign:'center'
+        color: '#fff',
+        textAlign: 'center'
     },
-    incorrectBtn:{
+    incorrectBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#f00',
         borderRadius: 10,
         borderWidth: 1,
@@ -197,10 +202,10 @@ const styles = StyleSheet.create({
         minWidth: '80%'
 
     },
-    incorrectTxt:{
+    incorrectTxt: {
         fontWeight: 'bold',
-        color:'#fff',
-        textAlign:'center'
+        color: '#fff',
+        textAlign: 'center'
     }
 
 });

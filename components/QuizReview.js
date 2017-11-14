@@ -28,6 +28,12 @@ class QuizReview extends Component {
         this.props.navigation.dispatch(resetAction)
     };
 
+    onRestartPress = () =>{
+        const { params } = this.props.navigation.state;
+        const { navigate } = this.props.navigation;
+        navigate('Quiz', {questions:params.questions, deck:params.deck});
+    };
+
     render() {
         const {params} = this.props.navigation.state;
         const score = this.evaluateScore(params.questions);
@@ -45,9 +51,14 @@ class QuizReview extends Component {
                     </Text>
                 </View>
                 <View>
+                    <TouchableOpacity style={styles.restartBtn} onPress={this.onRestartPress}>
+                        <Text style={styles.restartTxt}>
+                            Restart Quiz
+                        </Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.homeBtn} onPress={this.onHomePress}>
                         <Text style={styles.homeTxt}>
-                            Home
+                            Back to Decks
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -82,10 +93,25 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontWeight:'bold'
     },
+    restartBtn:{
+        padding: 10,
+        margin:5,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#000',
+        minWidth: '80%'
+
+    },
+    restartTxt:{
+        fontWeight: 'bold',
+        color:'#000',
+        textAlign:'center'
+    },
     homeBtn:{
         padding: 10,
         margin:5,
-        backgroundColor: '#0a0',
+        backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#000',
