@@ -21,6 +21,12 @@ class DeckDetail extends Component {
         navigate('NewCard', {deck:params.title})
     };
 
+    onStartQuizPress = () =>{
+        console.log("onStartQuizPress");
+        const { navigate } = this.props.navigation;
+        navigate('Quiz', {activeQuestion:{question:'What is React?', answer:'A library for managing user interfaces'}});
+    };
+
 
     render() {
         const { params } = this.props.navigation.state;
@@ -37,7 +43,7 @@ class DeckDetail extends Component {
                             Add Card
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style = {styles.startQuizBtn}>
+                    <TouchableOpacity style = {styles.startQuizBtn} onPress={this.onStartQuizPress}>
                         <Text  style = {styles.startQuizTxt}>
                             Start Quiz
                         </Text>

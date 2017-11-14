@@ -6,6 +6,7 @@ import Deck from "./Deck";
 import DeckDetail from "./DeckDetail";
 import NewDeck from "./NewDeck";
 import NewCard from "./NewCard";
+import Card from "./Card";
 
 const Tabs = TabNavigator({
     Home: {
@@ -32,6 +33,9 @@ const Stack = StackNavigator({
     NewCard:{
         screen: NewCard,
 
+    },
+    Quiz:{
+        screen: Card,
     }
 
 });
