@@ -102,10 +102,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#000',
+        minWidth: '80%'
     },
     submitTxt:{
         fontWeight: 'bold',
-        color:'#fff'
+        color:'#fff',
+        textAlign:'center'
     }
 });

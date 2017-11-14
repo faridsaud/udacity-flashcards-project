@@ -88,10 +88,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#000',
+        minWidth: '80%'
+
     },
     addCardTxt:{
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign:'center'
     },
     startQuizBtn:{
         padding: 10,
@@ -99,10 +102,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#000',
+        minWidth: '80%'
     },
     startQuizTxt:{
         fontWeight: 'bold',
-        color:'#fff'
+        color:'#fff',
+        textAlign:'center'
+
     }
 });

@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign:'center'
     },
     textInput: {
         minWidth: '100%',
@@ -83,10 +84,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#000',
+        minWidth: '80%'
     },
     submitTxt: {
         fontWeight: 'bold',
-        color: '#fff'
+        color: '#fff',
+        textAlign:'center'
     }
 });

@@ -6,6 +6,19 @@ import FlipCard from "react-native-flip-card";
 
 
 class Card extends Component {
+
+    static navigationOptions = ({ navigation })=>{
+        let title = "";
+        if(navigation.state.params.index){
+            title = `${navigation.state.params.index+1}/${navigation.state.params.questions.length}`
+        }else{
+            title = `1/${navigation.state.params.questions.length}`
+        }
+        return {
+            title
+        }
+    };
+
     state = {
         deck:null,
         questions: null,
@@ -149,7 +162,8 @@ const styles = StyleSheet.create({
     },
     question: {
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign:'center'
     },
     answer: {
         fontSize: 24,
@@ -165,7 +179,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#0a0',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#000',
+        minWidth: '80%'
     },
     correctTxt:{
         fontWeight: 'bold',
@@ -178,13 +193,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#f00',
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#000',
+        minWidth: '80%'
+
     },
     incorrectTxt:{
         fontWeight: 'bold',
         color:'#fff',
         textAlign:'center'
-
     }
 
 });
