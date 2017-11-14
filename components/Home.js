@@ -7,12 +7,13 @@ import DeckDetail from "./DeckDetail";
 import NewDeck from "./NewDeck";
 import NewCard from "./NewCard";
 import Card from "./Card";
+import { Constants } from 'expo'
 
 const Tabs = TabNavigator({
     Home: {
         screen: DeckList,
         navigationOptions: {
-            tabBarLabel: 'Decks'
+            tabBarLabel: 'Decks',
         },
     },
     NewDeck:{
@@ -21,6 +22,14 @@ const Tabs = TabNavigator({
             tabBarLabel: 'New Deck'
         },
     }
+},{
+    /*
+    tabBarOptions:{
+        style:{
+            marginTop:Constants.statusBarHeight
+        }
+    }
+    */
 });
 
 const Stack = StackNavigator({
@@ -38,6 +47,10 @@ const Stack = StackNavigator({
         screen: Card,
     }
 
+},{
+    cardStyle: {
+        paddingTop: Constants.statusBarHeight
+    }
 });
 
 

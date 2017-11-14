@@ -1,6 +1,6 @@
 import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput, CheckBox} from 'react-native';
 import DeckDetail from "./DeckDetail";
 
 
@@ -9,7 +9,8 @@ class NewCard extends Component {
     state = {
         question: "",
         answer:"",
-        deck:""
+        deck:"",
+        isCorrect:false
     };
 
     componentDidMount = () =>{
@@ -18,6 +19,13 @@ class NewCard extends Component {
             deck:params.deck
         })
     };
+
+    onCheckBoxValueChange = () =>{
+        this.setState(state=>({
+            ...state,
+            isCorrect:!state.isCorrect
+        }))
+    }
 
     onQuestionTextChange = (text) => {
         this.setState(state => {
@@ -45,8 +53,9 @@ class NewCard extends Component {
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
                     <TextInput style={styles.textInput} value={this.state.question} onChangeText={this.onQuestionTextChange} placeholder="Enter the question of your new Card"/>
-
-                    <TextInput style={styles.textInput} value={this.state.answer} onChangeText={this.onAnswerTextChange} placeholder="Enter the answer of your new Card"/>
+                    <TextInput style={styles.textInput} value={this.state.answer} onChangeText={this.onAnswerTextChange} numberOfLines={4} multiline={true} placeholder="Enter the answer of your new Card"/>
+                    <Text>Is correct?</Text>
+                    <CheckBox value={this.state.isCorrect} onChange={this.onCheckBoxValueChange}/>
                 </View>
                 <View>
                     <TouchableOpacity style = {styles.submitBtn} onPress={this.onSubmit}>
