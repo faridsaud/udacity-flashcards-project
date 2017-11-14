@@ -23,8 +23,10 @@ class DeckDetail extends Component {
 
     onStartQuizPress = () =>{
         console.log("onStartQuizPress");
+        const { params } = this.props.navigation.state;
         const { navigate } = this.props.navigation;
-        navigate('Quiz', {activeQuestion:{question:'What is React?', answer:'A library for managing user interfaces'}});
+        console.log("Object to send",  {questions:params.questions, deck:params.title});
+        navigate('Quiz', {questions:params.questions, deck:params.title});
     };
 
 

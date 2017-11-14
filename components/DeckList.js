@@ -17,11 +17,13 @@ class DeckList extends Component {
                 questions: [
                     {
                         question: 'What is React?',
-                        answer: 'A library for managing user interfaces'
+                        answer: 'A library for managing user interfaces',
+                        isCorrect:true
                     },
                     {
                         question: 'Where do you make Ajax requests in React?',
-                        answer: 'The componentDidMount lifecycle event'
+                        answer: 'The componentDidMount lifecycle event',
+                        isCorrect:true
                     }
                 ]
             },
@@ -30,7 +32,13 @@ class DeckList extends Component {
                 questions: [
                     {
                         question: 'What is a closure?',
-                        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                        answer: 'The combination of a function and the lexical environment within which that function was declared.',
+                        isCorrect:true
+                    },
+                    {
+                        question: 'What is javascript',
+                        answer: 'Low level programming language.',
+                        isCorrect:false
                     }
                 ]
             }

@@ -8,6 +8,7 @@ import NewDeck from "./NewDeck";
 import NewCard from "./NewCard";
 import Card from "./Card";
 import { Constants } from 'expo'
+import QuizReview from "./QuizReview";
 
 const Tabs = TabNavigator({
     Home: {
@@ -45,6 +46,9 @@ const Stack = StackNavigator({
     },
     Quiz:{
         screen: Card,
+    },
+    QuizReview:{
+        screen:QuizReview,
     }
 
 },{

@@ -7,10 +7,25 @@ import FlipCard from "react-native-flip-card";
 
 class Card extends Component {
     state = {
-        activeQuestion: {},
-        questions: [],
+        deck:null,
+        questions: null,
         index: 0,
         isFlipped:false
+    };
+
+    componentDidMount(){
+        const { params } = this.props.navigation.state;
+        console.log('params',params);
+        console.log('state', this.state);
+        console.log('params.index',params.index);
+        let currentIndex = params.index?(params.index):this.state.index;
+        console.log('currentIndex',currentIndex);
+        this.setState((prevState)=>({
+            ...prevState,
+            questions:params.questions,
+            index:currentIndex,
+            deck:params.deck
+        }));
     };
 
     onFlipPress = () =>{
@@ -21,6 +36,33 @@ class Card extends Component {
             }
         ))
     };
+
+    onCorrectPress = () =>{
+        let questions = this.state.questions;
+        questions[this.state.index].optionSelected = 'correct';
+        const { navigate } = this.props.navigation;
+        if((this.state.index+1)<questions.length){
+            navigate('Quiz', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
+        }else{
+            navigate('QuizReview', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
+            //persist result with redux
+        }
+
+
+    };
+
+    onIncorrectPress = () =>{
+        let questions = this.state.questions;
+        questions[this.state.index].optionSelected = 'incorrect';
+        const { navigate } = this.props.navigation;
+        if((this.state.index+1)<questions.length){
+            navigate('Quiz', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
+        }else{
+            navigate('QuizReview', {questions:this.state.questions, deck:this.state.deck, index:(this.state.index+1)});
+            //persist result with redux
+        }
+    };
+
     render() {
         const { params } = this.props.navigation.state;
         return (
@@ -30,13 +72,17 @@ class Card extends Component {
                         {/* Face Side */}
                         <View style={styles.container}>
                             <Text  style={styles.question}>
-                                {params.activeQuestion.question}
+                                {this.state.questions &&
+                                    this.state.questions[this.state.index].question
+                                }
                             </Text>
                         </View>
                         {/* Back Side */}
                         <View style={styles.container}>
                             <Text style={styles.answer}>
-                                {params.activeQuestion.answer}
+                                {this.state.questions &&
+                                this.state.questions[this.state.index].answer
+                                }
                             </Text>
                         </View>
                     </FlipCard>
@@ -56,12 +102,12 @@ class Card extends Component {
                 </View>
 
                 <View>
-                    <TouchableOpacity style = {styles.correctBtn} onPress={this.onAddCardPress}>
+                    <TouchableOpacity style = {styles.correctBtn} onPress={this.onCorrectPress}>
                         <Text style = {styles.correctTxt} >
                             Correct
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style = {styles.incorrectBtn} onPress={this.onStartQuizPress}>
+                    <TouchableOpacity style = {styles.incorrectBtn} onPress={this.onIncorrectPress}>
                         <Text  style = {styles.incorrectTxt}>
                             Incorrect
                         </Text>
