@@ -1,22 +1,17 @@
 
-import {ADD_DECK, GET_DECK} from '../utils/constants'
+import {ADD_DECK} from '../utils/constants'
 
 
-export default function category(state = {}, action) {
+export default function deck(state = {}, action) {
+    let newState = JSON.parse(JSON.stringify(state));
     switch (action.type) {
         case ADD_DECK :
-            return {
-                ...state,
-                action['title']:{
-
-                }
+            newState[action.title] = {
+                title:action.title,
+                questions:[]
             };
-        case GET_DECK :
-            return {
-                categories: [...action.categories],
-                isFetch: true
-            };
-        default :
+            return newState;
+        default:
             return state
     }
 }
