@@ -1,6 +1,6 @@
 import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DeckDetail from "./DeckDetail";
 import FlipCard from "react-native-flip-card";
 
@@ -18,7 +18,7 @@ class Card extends Component {
         questions: null,
         index: 0,
         isFlipped: false,
-        finished:false
+        finished: false
     };
 
     componentDidMount() {
@@ -60,7 +60,7 @@ class Card extends Component {
                 ...prevState,
                 questions,
                 index: ((prevState.index + 1) === questions.length) ? prevState.index : (prevState.index + 1),
-                finished:((prevState.index + 1) === questions.length)
+                finished: ((prevState.index + 1) === questions.length)
             }
         });
         console.log('state', this.state)
@@ -75,34 +75,33 @@ class Card extends Component {
                 ...prevState,
                 questions,
                 index: ((prevState.index + 1) === questions.length) ? prevState.index : (prevState.index + 1),
-                finished:((prevState.index + 1) === questions.length)
+                finished: ((prevState.index + 1) === questions.length)
             }
         });
         console.log('state', this.state)
     };
 
     render() {
-        const {params} = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
                     <FlipCard style={styles.flipCard} perspective={1000} clickable={false} flip={this.state.isFlipped}>
                         {/* Face Side */}
-                        <View style={styles.container}>
+                        <ScrollView>
                             <Text style={styles.question}>
                                 {this.state.questions &&
                                 this.state.questions[this.state.index].question
                                 }
                             </Text>
-                        </View>
+                        </ScrollView>
                         {/* Back Side */}
-                        <View style={styles.container}>
+                        <ScrollView>
                             <Text style={styles.answer}>
                                 {this.state.questions &&
                                 this.state.questions[this.state.index].answer
                                 }
                             </Text>
-                        </View>
+                        </ScrollView>
                     </FlipCard>
                     <TouchableOpacity onPress={this.onFlipPress}>
                         {
@@ -166,12 +165,12 @@ const styles = StyleSheet.create({
         minWidth: '100%'
     },
     question: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
     },
     answer: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
     },
@@ -206,6 +205,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         textAlign: 'center'
+    },
+    questionNumberContainer: {
+        flex: 0.1,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start'
     }
 
 });
