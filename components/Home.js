@@ -1,13 +1,12 @@
 import {StackNavigator, TabNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import DeckList from './DeckList'
-import Deck from "./Deck";
 import DeckDetail from "./DeckDetail";
 import NewDeck from "./NewDeck";
 import NewCard from "./NewCard";
 import Card from "./Card";
-import { Constants } from 'expo'
+import {Constants} from 'expo'
 import QuizReview from "./QuizReview";
 
 const Tabs = TabNavigator({
@@ -17,13 +16,13 @@ const Tabs = TabNavigator({
             tabBarLabel: 'Decks',
         },
     },
-    NewDeck:{
-        screen:NewDeck,
+    NewDeck: {
+        screen: NewDeck,
         navigationOptions: {
             tabBarLabel: 'New Deck'
         },
     }
-},{
+}, {
     /*
     tabBarOptions:{
         style:{
@@ -37,21 +36,21 @@ const Stack = StackNavigator({
     Decks: {
         screen: Tabs,
     },
-    DeckDetail:{
+    DeckDetail: {
         screen: DeckDetail,
     },
-    NewCard:{
+    NewCard: {
         screen: NewCard,
 
     },
-    Quiz:{
+    Quiz: {
         screen: Card,
     },
-    QuizReview:{
-        screen:QuizReview,
+    QuizReview: {
+        screen: QuizReview,
     }
 
-},{
+}, {
     cardStyle: {
         paddingTop: Constants.statusBarHeight
     }

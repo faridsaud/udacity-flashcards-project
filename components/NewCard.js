@@ -1,7 +1,5 @@
-import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput, CheckBox, Alert} from 'react-native';
-import DeckDetail from "./DeckDetail";
+import {Alert, CheckBox, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {connect} from "react-redux";
 import {createCard} from "../actions/Card";
 
@@ -10,22 +8,22 @@ class NewCard extends Component {
 
     state = {
         question: "",
-        answer:"",
-        deck:"",
-        isCorrect:false
+        answer: "",
+        deck: "",
+        isCorrect: false
     };
 
-    componentDidMount = () =>{
-        const { params } = this.props.navigation.state;
+    componentDidMount = () => {
+        const {params} = this.props.navigation.state;
         this.setState({
-            deck:params.deck
+            deck: params.deck
         })
     };
 
-    onCheckBoxValueChange = () =>{
-        this.setState(state=>({
+    onCheckBoxValueChange = () => {
+        this.setState(state => ({
             ...state,
-            isCorrect:!state.isCorrect
+            isCorrect: !state.isCorrect
         }))
     }
 
@@ -45,35 +43,44 @@ class NewCard extends Component {
             }
         })
     };
-    onSubmit = () =>{
-        if(this.state.question==='' || this.state.answer===''){
+    onSubmit = () => {
+        if (this.state.question === '' || this.state.answer === '') {
             Alert.alert(
                 'Empty Field',
                 "The question or answer can't be empty",
                 [
                     {text: 'OK', onPress: () => console.log('OK Pressed')},
                 ],
-                { cancelable: false }
+                {cancelable: false}
             )
-        }else{
-            const { navigate } = this.props.navigation;
-            this.props.addCard({question:this.state.question, answer:this.state.answer, deckId:this.state.deck, isCorrect:this.state.isCorrect}).then(()=>{
+        } else {
+            const {navigate} = this.props.navigation;
+            this.props.addCard({
+                question: this.state.question,
+                answer: this.state.answer,
+                deckId: this.state.deck,
+                isCorrect: this.state.isCorrect
+            }).then(() => {
                 navigate('Decks', {})
             })
         }
     };
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
-                    <TextInput style={styles.textInput} value={this.state.question} onChangeText={this.onQuestionTextChange} placeholder="Enter the question of your new Card"/>
-                    <TextInput style={styles.textInput} value={this.state.answer} onChangeText={this.onAnswerTextChange} numberOfLines={4} multiline={true} placeholder="Enter the answer of your new Card"/>
+                    <TextInput style={styles.textInput} value={this.state.question}
+                               onChangeText={this.onQuestionTextChange}
+                               placeholder="Enter the question of your new Card"/>
+                    <TextInput style={styles.textInput} value={this.state.answer} onChangeText={this.onAnswerTextChange}
+                               numberOfLines={4} multiline={true} placeholder="Enter the answer of your new Card"/>
                     <Text>Is correct?</Text>
                     <CheckBox value={this.state.isCorrect} onChange={this.onCheckBoxValueChange}/>
                 </View>
                 <View>
-                    <TouchableOpacity style = {styles.submitBtn} onPress={this.onSubmit}>
-                        <Text style = {styles.submitTxt} >
+                    <TouchableOpacity style={styles.submitBtn} onPress={this.onSubmit}>
+                        <Text style={styles.submitTxt}>
                             Submit
                         </Text>
                     </TouchableOpacity>
@@ -83,7 +90,6 @@ class NewCard extends Component {
         )
     }
 }
-
 
 
 const mapDispatchToProps = dispatch => ({
@@ -120,18 +126,18 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5
     },
-    submitBtn:{
+    submitBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#000',
         minWidth: '80%'
     },
-    submitTxt:{
+    submitTxt: {
         fontWeight: 'bold',
-        color:'#fff',
-        textAlign:'center'
+        color: '#fff',
+        textAlign: 'center'
     }
 });

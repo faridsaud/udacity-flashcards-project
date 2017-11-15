@@ -2,9 +2,9 @@ import {ADD_CARD} from '../utils/constants'
 import * as StorageUtil from "../utils/storage";
 
 
-export function addCard({question, answer, deckId, isCorrect}){
+export function addCard({question, answer, deckId, isCorrect}) {
     return {
-        type:ADD_CARD,
+        type: ADD_CARD,
         question,
         answer,
         deckId,

@@ -1,37 +1,32 @@
-import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import Deck from "./Deck";
-import DeckList from "./DeckList";
-
-
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 
 class DeckDetail extends Component {
-    static navigationOptions = ({ navigation })=>{
+    static navigationOptions = ({navigation}) => {
         return {
             title: `${navigation.state.params.title}`
         }
     };
 
 
-    onAddCardPress = () =>{
-        const { params } = this.props.navigation.state;
-        const { navigate } = this.props.navigation;
-        navigate('NewCard', {deck:params.title})
+    onAddCardPress = () => {
+        const {params} = this.props.navigation.state;
+        const {navigate} = this.props.navigation;
+        navigate('NewCard', {deck: params.title})
     };
 
-    onStartQuizPress = () =>{
+    onStartQuizPress = () => {
         console.log("onStartQuizPress");
-        const { params } = this.props.navigation.state;
-        const { navigate } = this.props.navigation;
-        console.log("Object to send",  {questions:params.questions, deck:params.title});
-        navigate('Quiz', {questions:params.questions, deck:params.title});
+        const {params} = this.props.navigation.state;
+        const {navigate} = this.props.navigation;
+        console.log("Object to send", {questions: params.questions, deck: params.title});
+        navigate('Quiz', {questions: params.questions, deck: params.title});
     };
 
 
     render() {
-        const { params } = this.props.navigation.state;
+        const {params} = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
@@ -40,13 +35,13 @@ class DeckDetail extends Component {
                 </View>
 
                 <View>
-                    <TouchableOpacity style = {styles.addCardBtn} onPress={this.onAddCardPress}>
-                        <Text style = {styles.addCardTxt} >
+                    <TouchableOpacity style={styles.addCardBtn} onPress={this.onAddCardPress}>
+                        <Text style={styles.addCardTxt}>
                             Add Card
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style = {styles.startQuizBtn} onPress={this.onStartQuizPress}>
-                        <Text  style = {styles.startQuizTxt}>
+                    <TouchableOpacity style={styles.startQuizBtn} onPress={this.onStartQuizPress}>
+                        <Text style={styles.startQuizTxt}>
                             Start Quiz
                         </Text>
                     </TouchableOpacity>
@@ -66,9 +61,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: '#fff',
-        borderTopWidth:40,
-        borderBottomWidth:40,
-        minWidth:'100%'
+        borderTopWidth: 40,
+        borderBottomWidth: 40,
+        minWidth: '100%'
     },
     contentContainer: {
         flex: 1,
@@ -79,12 +74,12 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: 'bold'
     },
-    description:{
-        fontSize:24
+    description: {
+        fontSize: 24
     },
-    addCardBtn:{
+    addCardBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#fff',
         borderRadius: 10,
         borderWidth: 1,
@@ -92,23 +87,23 @@ const styles = StyleSheet.create({
         minWidth: '80%'
 
     },
-    addCardTxt:{
+    addCardTxt: {
         fontWeight: 'bold',
-        textAlign:'center'
+        textAlign: 'center'
     },
-    startQuizBtn:{
+    startQuizBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#000',
         minWidth: '80%'
     },
-    startQuizTxt:{
+    startQuizTxt: {
         fontWeight: 'bold',
-        color:'#fff',
-        textAlign:'center'
+        color: '#fff',
+        textAlign: 'center'
 
     }
 });

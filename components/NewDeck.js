@@ -1,8 +1,6 @@
-import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput, Alert} from 'react-native';
-import DeckDetail from "./DeckDetail";
-import {addDeck, createDeck} from "../actions/Deck";
+import {Alert, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {createDeck} from "../actions/Deck";
 import {connect} from "react-redux";
 
 
@@ -26,18 +24,18 @@ class NewDeck extends Component {
     };
 
     onSubmit = () => {
-        if(this.state.title===''){
+        if (this.state.title === '') {
             Alert.alert(
                 'Empty Field',
                 "Title can't be empty",
                 [
                     {text: 'OK', onPress: () => console.log('OK Pressed')},
                 ],
-                { cancelable: false }
+                {cancelable: false}
             )
-        }else{
+        } else {
             const {navigate} = this.props.navigation;
-            this.props.addDeck({title:this.state.title}).then(()=>{
+            this.props.addDeck({title: this.state.title}).then(() => {
                 navigate('Decks', {})
             })
         }
@@ -65,7 +63,6 @@ class NewDeck extends Component {
         )
     }
 }
-
 
 
 const mapDispatchToProps = dispatch => ({
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        textAlign:'center'
+        textAlign: 'center'
     },
     textInput: {
         minWidth: '100%',
@@ -115,6 +112,6 @@ const styles = StyleSheet.create({
     submitTxt: {
         fontWeight: 'bold',
         color: '#fff',
-        textAlign:'center'
+        textAlign: 'center'
     }
 });

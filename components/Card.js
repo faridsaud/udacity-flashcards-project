@@ -1,7 +1,5 @@
-import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import DeckDetail from "./DeckDetail";
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FlipCard from "react-native-flip-card";
 
 

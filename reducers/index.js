@@ -1,4 +1,3 @@
-
 import {ADD_CARD, ADD_DECK, ADD_DECKS} from '../utils/constants'
 
 
@@ -7,8 +6,8 @@ export default function reducer(state = {}, action) {
     switch (action.type) {
         case ADD_DECK :
             newState[action.title] = {
-                title:action.title,
-                questions:[]
+                title: action.title,
+                questions: []
             };
             return newState;
         case ADD_DECKS :
@@ -17,9 +16,9 @@ export default function reducer(state = {}, action) {
             console.log("Reducer action", action);
             console.log("New state", newState);
             newState[action.deckId].questions.push({
-                question:action.question,
-                answer:action.answer,
-                isCorrect:action.isCorrect
+                question: action.question,
+                answer: action.answer,
+                isCorrect: action.isCorrect
             });
             console.log("New state after", newState);
             return newState;

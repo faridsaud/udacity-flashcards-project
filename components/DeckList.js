@@ -1,8 +1,6 @@
-import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import Deck from "./Deck";
-import {AsyncStorage } from 'react-native'
 import {connect} from "react-redux";
 import {getDecks} from "../actions/Deck";
 
@@ -13,10 +11,10 @@ class DeckList extends Component {
         header: null
     };
 
-    state={
-        decks:{}
+    state = {
+        decks: {}
     };
-    getDeckList = () =>{
+    getDeckList = () => {
         return Object.values(this.state.decks);
     };
 
@@ -31,7 +29,7 @@ class DeckList extends Component {
         );
     };
 
-    componentDidMount=()=>{
+    componentDidMount = () => {
         this.props.getDecks();
     };
 
@@ -41,14 +39,16 @@ class DeckList extends Component {
         });
     }
 
-    renderItem = ({item}) =>{
+    renderItem = ({item}) => {
         return <Deck title={item.title} questions={item.questions} id={item.title} navigation={this.props.navigation}/>
     };
+
     render() {
         const data = this.getDeckList();
         return (
             <View style={styles.container}>
-                <FlatList style={styles.list} data={data} renderItem={this.renderItem} keyExtractor={(item, index) => index} ItemSeparatorComponent={this.renderSeparator}/>
+                <FlatList style={styles.list} data={data} renderItem={this.renderItem}
+                          keyExtractor={(item, index) => index} ItemSeparatorComponent={this.renderSeparator}/>
             </View>
         )
     }
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    list:{
+    list: {
         flex: 1
     }
 });

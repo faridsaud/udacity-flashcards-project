@@ -1,8 +1,6 @@
-import {StackNavigator} from 'react-navigation';
+import {NavigationActions} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import DeckDetail from "./DeckDetail";
-import { NavigationActions } from 'react-navigation'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 
 class QuizReview extends Component {
@@ -18,27 +16,27 @@ class QuizReview extends Component {
         }
     };
 
-    onHomePress = () =>{
+    onHomePress = () => {
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [
-                NavigationActions.navigate({ routeName: 'Decks'})
+                NavigationActions.navigate({routeName: 'Decks'})
             ]
         })
         this.props.navigation.dispatch(resetAction)
     };
 
-    onRestartPress = () =>{
-        const { params } = this.props.navigation.state;
-        const { navigate } = this.props.navigation;
-        navigate('Quiz', {questions:params.questions, deck:params.deck});
+    onRestartPress = () => {
+        const {params} = this.props.navigation.state;
+        const {navigate} = this.props.navigation;
+        navigate('Quiz', {questions: params.questions, deck: params.deck});
     };
 
     render() {
         const {params} = this.props.navigation.state;
         const score = this.evaluateScore(params.questions);
         return (
-            <View style = {styles.container}>
+            <View style={styles.container}>
                 <View style={styles.contentContainer}>
                     <Text style={styles.text}>
                         Total questions: {score.totalQuestions}
@@ -89,13 +87,13 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold'
     },
-    text:{
-        fontSize:14,
-        fontWeight:'bold'
+    text: {
+        fontSize: 14,
+        fontWeight: 'bold'
     },
-    restartBtn:{
+    restartBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#fff',
         borderRadius: 10,
         borderWidth: 1,
@@ -103,14 +101,14 @@ const styles = StyleSheet.create({
         minWidth: '80%'
 
     },
-    restartTxt:{
+    restartTxt: {
         fontWeight: 'bold',
-        color:'#000',
-        textAlign:'center'
+        color: '#000',
+        textAlign: 'center'
     },
-    homeBtn:{
+    homeBtn: {
         padding: 10,
-        margin:5,
+        margin: 5,
         backgroundColor: '#000',
         borderRadius: 10,
         borderWidth: 1,
@@ -118,9 +116,9 @@ const styles = StyleSheet.create({
         minWidth: '80%'
 
     },
-    homeTxt:{
+    homeTxt: {
         fontWeight: 'bold',
-        color:'#fff',
-        textAlign:'center'
+        color: '#fff',
+        textAlign: 'center'
     }
 });

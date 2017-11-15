@@ -1,16 +1,14 @@
-import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DeckDetail from "./DeckDetail";
-
-
 
 
 class Deck extends Component {
     render() {
-        const { navigate } = this.props.navigation;
+        const {navigate} = this.props.navigation;
         return (
-            <TouchableOpacity onPress={() => navigate('DeckDetail', { title: this.props.title, questions:this.props.questions})}>
+            <TouchableOpacity
+                onPress={() => navigate('DeckDetail', {title: this.props.title, questions: this.props.questions})}>
                 <View style={styles.container}>
                     <Text style={styles.title}>{this.props.title}</Text>
                     <Text>{this.props.questions.length} cards</Text>
