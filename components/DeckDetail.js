@@ -17,10 +17,8 @@ class DeckDetail extends Component {
     };
 
     onStartQuizPress = () => {
-        console.log("onStartQuizPress");
         const {params} = this.props.navigation.state;
         const {navigate} = this.props.navigation;
-        console.log("Object to send", {questions: params.questions, deck: params.title});
         navigate('Quiz', {questions: params.questions, deck: params.title});
     };
 

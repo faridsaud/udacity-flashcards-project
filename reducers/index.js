@@ -13,14 +13,11 @@ export default function reducer(state = {}, action) {
         case ADD_DECKS :
             return JSON.parse(action.decks);
         case ADD_CARD :
-            console.log("Reducer action", action);
-            console.log("New state", newState);
             newState[action.deckId].questions.push({
                 question: action.question,
                 answer: action.answer,
                 isCorrect: action.isCorrect
             });
-            console.log("New state after", newState);
             return newState;
         default:
             return state

@@ -26,7 +26,6 @@ class Card extends Component {
             questions: params.questions,
             deck: params.deck
         }));
-        console.log('state', this.state)
     };
 
 
@@ -41,18 +40,14 @@ class Card extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         const {navigate} = nextProps.navigation;
-        console.log("nextProps", nextProps);
-        console.log("nextState", nextState);
         if (nextState.finished) {
             navigate('QuizReview', {questions: nextState.questions, deck: nextState.deck});
-            //persist result with redux
         }
     }
 
     onCorrectPress = () => {
         let questions = this.state.questions;
         questions[this.state.index].optionSelected = 'correct';
-        console.log("OnCorrectPress");
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -61,13 +56,11 @@ class Card extends Component {
                 finished: ((prevState.index + 1) === questions.length)
             }
         });
-        console.log('state', this.state)
     };
 
     onIncorrectPress = () => {
         let questions = this.state.questions;
         questions[this.state.index].optionSelected = 'incorrect';
-        console.log("OnIncorrectPress");
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -76,7 +69,6 @@ class Card extends Component {
                 finished: ((prevState.index + 1) === questions.length)
             }
         });
-        console.log('state', this.state)
     };
 
     render() {

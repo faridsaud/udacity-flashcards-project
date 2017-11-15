@@ -29,7 +29,7 @@ class NewDeck extends Component {
                 'Empty Field',
                 "Title can't be empty",
                 [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    {text: 'OK', onPress: () => {}},
                 ],
                 {cancelable: false}
             )

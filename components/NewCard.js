@@ -49,7 +49,7 @@ class NewCard extends Component {
                 'Empty Field',
                 "The question or answer can't be empty",
                 [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    {text: 'OK', onPress: () => {}},
                 ],
                 {cancelable: false}
             )

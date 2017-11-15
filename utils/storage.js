@@ -2,7 +2,6 @@ import {AsyncStorage} from 'react-native'
 import {DECKS} from "./constants";
 
 export function createCard({deckId, question, answer, isCorrect}) {
-    console.log("createCard", {deckId, question, answer, isCorrect});
     return AsyncStorage.getItem(DECKS).then(decks => {
         decks = JSON.parse(decks);
         decks[deckId].questions.push({
