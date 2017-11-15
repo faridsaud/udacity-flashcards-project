@@ -37,7 +37,7 @@ class DeckList extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            decks: JSON.parse(nextProps.decks)
+            decks: nextProps.decks
         });
     }
 

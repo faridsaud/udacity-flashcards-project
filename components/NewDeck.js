@@ -1,6 +1,6 @@
 import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput, Alert} from 'react-native';
 import DeckDetail from "./DeckDetail";
 import {addDeck, createDeck} from "../actions/Deck";
 import {connect} from "react-redux";
@@ -26,10 +26,21 @@ class NewDeck extends Component {
     };
 
     onSubmit = () => {
-        const {navigate} = this.props.navigation;
-        this.props.addDeck({title:this.state.title}).then(()=>{
-            navigate('Decks', {})
-        })
+        if(this.state.title===''){
+            Alert.alert(
+                'Empty Field',
+                "Title can't be empty",
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            )
+        }else{
+            const {navigate} = this.props.navigation;
+            this.props.addDeck({title:this.state.title}).then(()=>{
+                navigate('Decks', {})
+            })
+        }
     };
 
     render() {

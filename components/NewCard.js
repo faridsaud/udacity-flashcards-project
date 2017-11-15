@@ -1,7 +1,9 @@
 import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput, CheckBox} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput, CheckBox, Alert} from 'react-native';
 import DeckDetail from "./DeckDetail";
+import {connect} from "react-redux";
+import {createCard} from "../actions/Card";
 
 
 class NewCard extends Component {
@@ -44,9 +46,21 @@ class NewCard extends Component {
         })
     };
     onSubmit = () =>{
-        console.log(this.state);
-        const { navigate } = this.props.navigation;
-        navigate('Decks', {})
+        if(this.state.question==='' || this.state.answer===''){
+            Alert.alert(
+                'Empty Field',
+                "The question or answer can't be empty",
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            )
+        }else{
+            const { navigate } = this.props.navigation;
+            this.props.addCard({question:this.state.question, answer:this.state.answer, deckId:this.state.deck, isCorrect:this.state.isCorrect}).then(()=>{
+                navigate('Decks', {})
+            })
+        }
     };
     render() {
         return (
@@ -70,7 +84,17 @@ class NewCard extends Component {
     }
 }
 
-export default NewCard
+
+
+const mapDispatchToProps = dispatch => ({
+    addCard: ({question, answer, deckId, isCorrect}) => dispatch(createCard({question, answer, deckId, isCorrect}))
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(NewCard);
+
 
 const styles = StyleSheet.create({
     container: {
