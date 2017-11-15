@@ -2,6 +2,8 @@ import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
 import {FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput} from 'react-native';
 import DeckDetail from "./DeckDetail";
+import {addDeck, createDeck} from "../actions/Deck";
+import {connect} from "react-redux";
 
 
 class NewDeck extends Component {
@@ -25,7 +27,9 @@ class NewDeck extends Component {
 
     onSubmit = () => {
         const {navigate} = this.props.navigation;
-        navigate('Decks', {})
+        this.props.addDeck({title:this.state.title}).then(()=>{
+            navigate('Decks', {})
+        })
     };
 
     render() {
@@ -51,7 +55,17 @@ class NewDeck extends Component {
     }
 }
 
-export default NewDeck
+
+
+const mapDispatchToProps = dispatch => ({
+    addDeck: ({title}) => dispatch(createDeck({title}))
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(NewDeck)
+
 
 const styles = StyleSheet.create({
     container: {

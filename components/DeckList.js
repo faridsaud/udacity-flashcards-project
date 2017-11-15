@@ -2,7 +2,9 @@ import {StackNavigator} from 'react-navigation';
 import React, {Component} from 'react'
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Deck from "./Deck";
-
+import {AsyncStorage } from 'react-native'
+import {connect} from "react-redux";
+import {getDecks} from "../actions/Deck";
 
 
 class DeckList extends Component {
@@ -10,40 +12,12 @@ class DeckList extends Component {
         title: 'Decks',
         header: null
     };
+
+    state={
+        decks:{}
+    };
     getDeckList = () =>{
-        const deckList = {
-            React: {
-                title: 'React',
-                questions: [
-                    {
-                        question: 'What is React?',
-                        answer: 'A library for managing user interfaces',
-                        isCorrect:true
-                    },
-                    {
-                        question: 'Where do you make Ajax requests in React?',
-                        answer: 'The componentDidMount lifecycle event',
-                        isCorrect:true
-                    }
-                ]
-            },
-            JavaScript: {
-                title: 'JavaScript',
-                questions: [
-                    {
-                        question: 'What is a closure?',
-                        answer: 'The combination of a function and the lexical environment within which that function was declared - The combination of a function and the lexical environment within which that function was declared.',
-                        isCorrect:true
-                    },
-                    {
-                        question: 'What is javascript',
-                        answer: 'Low level programming language.',
-                        isCorrect:false
-                    }
-                ]
-            }
-        };
-        return Object.values(deckList);
+        return Object.values(this.state.decks);
     };
 
     renderSeparator = () => {
@@ -56,6 +30,16 @@ class DeckList extends Component {
             />
         );
     };
+
+    componentDidMount=()=>{
+        this.props.getDecks();
+    };
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            decks: JSON.parse(nextProps.decks)
+        });
+    }
 
     renderItem = ({item}) =>{
         return <Deck title={item.title} questions={item.questions} id={item.title} navigation={this.props.navigation}/>
@@ -70,7 +54,19 @@ class DeckList extends Component {
     }
 }
 
-export default DeckList
+const mapStateToProps = (state, props) => ({
+    decks: state
+});
+
+const mapDispatchToProps = dispatch => ({
+    getDecks: () => dispatch(getDecks())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(DeckList)
+
 
 const styles = StyleSheet.create({
     container: {
