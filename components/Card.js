@@ -121,6 +121,7 @@ class Card extends Component {
                             Incorrect
                         </Text>
                     </TouchableOpacity>
+                    {this.state.questions&&<Text style={{textAlign:'center'}}>Card: {this.state.index+1}/{this.state.questions.length}</Text>}
 
                 </View>
             </View>
