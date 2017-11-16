@@ -6,6 +6,13 @@ import {createCard} from "../actions/Card";
 
 class NewCard extends Component {
 
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Add Card'
+        }
+    };
+
     state = {
         question: "",
         answer: "",
@@ -25,7 +32,7 @@ class NewCard extends Component {
             ...state,
             isCorrect: !state.isCorrect
         }))
-    }
+    };
 
     onQuestionTextChange = (text) => {
         this.setState(state => {

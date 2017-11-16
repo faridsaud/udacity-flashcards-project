@@ -38,11 +38,15 @@ class DeckDetail extends Component {
                             Add Card
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.startQuizBtn} onPress={this.onStartQuizPress}>
-                        <Text style={styles.startQuizTxt}>
-                            Start Quiz
-                        </Text>
-                    </TouchableOpacity>
+                    {
+                        params.questions.length>0&&
+                        <TouchableOpacity style={styles.startQuizBtn} onPress={this.onStartQuizPress}>
+                            <Text style={styles.startQuizTxt}>
+                                Start Quiz
+                            </Text>
+                        </TouchableOpacity>
+                    }
+
 
                 </View>
             </View>

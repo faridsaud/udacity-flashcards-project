@@ -1,5 +1,16 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "sdkVersion": "22.0.0",
+    "orientation": "portrait",
+    "name": "UdaciFlashCards",
+    "description": "The best study helper app.",
+    "slug": "udaciflashcards",
+    "version": "1.0",
+    "ios": {
+      "bundleIdentifier": "org.udaciflashcards.fsr"
+    },
+    "android": {
+      "package": "org.udaciflashcards.fsr"
+    }
   }
 }

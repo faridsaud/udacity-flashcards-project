@@ -52,6 +52,7 @@ class Card extends Component {
             return {
                 ...prevState,
                 questions,
+                isFlipped:false,
                 index: ((prevState.index + 1) === questions.length) ? prevState.index : (prevState.index + 1),
                 finished: ((prevState.index + 1) === questions.length)
             }
@@ -65,6 +66,7 @@ class Card extends Component {
             return {
                 ...prevState,
                 questions,
+                isFlipped:false,
                 index: ((prevState.index + 1) === questions.length) ? prevState.index : (prevState.index + 1),
                 finished: ((prevState.index + 1) === questions.length)
             }

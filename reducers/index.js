@@ -11,6 +11,8 @@ export default function reducer(state = {}, action) {
             };
             return newState;
         case ADD_DECKS :
+            if(!action.decks)
+                return {};
             return JSON.parse(action.decks);
         case ADD_CARD :
             newState[action.deckId].questions.push({
