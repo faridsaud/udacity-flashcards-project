@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers'
 import thunk from "redux-thunk";
-
+import {setLocalNotification} from "./utils/notification";
 
 const store = createStore(
     reducer,
@@ -13,6 +13,10 @@ const store = createStore(
 );
 
 export default class App extends React.Component {
+    componentDidMount(){
+        console.log("Component mount");
+        setLocalNotification();
+    }
     render() {
         return (
             <Provider store={store}>

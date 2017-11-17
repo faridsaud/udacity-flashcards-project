@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {clearLocalNotification, setLocalNotification} from "../utils/notification";
 
 
 class DeckDetail extends Component {
@@ -17,6 +18,8 @@ class DeckDetail extends Component {
     };
 
     onStartQuizPress = () => {
+        clearLocalNotification()
+            .then(setLocalNotification);
         const {params} = this.props.navigation.state;
         const {navigate} = this.props.navigation;
         navigate('Quiz', {questions: params.questions, deck: params.title});
