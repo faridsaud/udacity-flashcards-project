@@ -58,6 +58,6 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 ## Additional Information
 
 * The "start quiz" button is only available when there is at least 1 Card in the deck.
-* The fields title when creating a Deck is required. There is a validation.
+* The field title when creating a Deck is required. There is a validation.
 * The fields question and answer when creating a Card are required. There is a validation.
 
