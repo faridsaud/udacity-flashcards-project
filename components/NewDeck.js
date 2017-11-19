@@ -36,7 +36,7 @@ class NewDeck extends Component {
         } else {
             const {navigate} = this.props.navigation;
             this.props.addDeck({title: this.state.title}).then(() => {
-                navigate('Decks', {})
+                navigate('DeckDetail', {title: this.state.title, questions:[]});
             })
         }
     };
