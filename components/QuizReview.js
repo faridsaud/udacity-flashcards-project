@@ -16,7 +16,7 @@ class QuizReview extends Component {
         }
     };
 
-    onHomePress = () => {
+    onBackToDecksPress = () => {
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [
@@ -24,6 +24,13 @@ class QuizReview extends Component {
             ]
         })
         this.props.navigation.dispatch(resetAction)
+    };
+
+    onBackToDeckPress = () => {
+        const {params} = this.props.navigation.state;
+        const {navigate} = this.props.navigation;
+        navigate('DeckDetail', {questions: params.questions, title: params.deck});
+
     };
 
     onRestartPress = () => {
@@ -54,7 +61,12 @@ class QuizReview extends Component {
                             Restart Quiz
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.homeBtn} onPress={this.onHomePress}>
+                    <TouchableOpacity style={styles.homeBtn} onPress={this.onBackToDeckPress}>
+                        <Text style={styles.homeTxt}>
+                            Back to Deck
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.homeBtn} onPress={this.onBackToDecksPress}>
                         <Text style={styles.homeTxt}>
                             Back to Decks
                         </Text>
