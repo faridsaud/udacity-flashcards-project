@@ -48,4 +48,7 @@ export function setLocalNotification () {
 export function clearLocalNotification () {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync)
-};
+}
+
+
+// The code snippets from the functions above were obtained from udacity/reactnd-UdaciFitness-complete Github repo.
