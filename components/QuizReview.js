@@ -22,7 +22,7 @@ class QuizReview extends Component {
             actions: [
                 NavigationActions.navigate({routeName: 'Decks'})
             ]
-        })
+        });
         this.props.navigation.dispatch(resetAction)
     };
 

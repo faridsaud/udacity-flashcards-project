@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {clearLocalNotification, setLocalNotification} from "../utils/notification";
+import {connect} from "react-redux";
 
 
 class DeckDetail extends Component {
@@ -10,29 +11,45 @@ class DeckDetail extends Component {
         }
     };
 
+    state = {
+        deck: {
+            questions: []
+        }
+    };
+
 
     onAddCardPress = () => {
-        const {params} = this.props.navigation.state;
         const {navigate} = this.props.navigation;
-        navigate('NewCard', {deck: params.title})
+        navigate('NewCard', {deck: this.state.deck.title})
     };
 
     onStartQuizPress = () => {
         clearLocalNotification()
             .then(setLocalNotification);
-        const {params} = this.props.navigation.state;
         const {navigate} = this.props.navigation;
-        navigate('Quiz', {questions: params.questions, deck: params.title});
+        navigate('Quiz', {questions: this.state.deck.questions, deck: this.state.deck.title});
     };
 
+    componentDidMount(){
+        this.setState({
+            deck:this.props.deck
+        })
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            deck: nextProps.deck
+        });
+    }
 
     render() {
-        const {params} = this.props.navigation.state;
+        let deck = this.state.deck;
         return (
             <View style={styles.container}>
                 <View style={styles.contentContainer}>
-                    <Text style={styles.title}>{params.title}</Text>
-                    <Text>{params.questions.length} cards</Text>
+                    <Text style={styles.title}>{deck.title}</Text>
+                    <Text>{deck.questions.length} cards</Text>
                 </View>
 
                 <View>
@@ -42,7 +59,7 @@ class DeckDetail extends Component {
                         </Text>
                     </TouchableOpacity>
                     {
-                        params.questions.length>0&&
+                        deck.questions.length > 0 &&
                         <TouchableOpacity style={styles.startQuizBtn} onPress={this.onStartQuizPress}>
                             <Text style={styles.startQuizTxt}>
                                 Start Quiz
@@ -57,7 +74,18 @@ class DeckDetail extends Component {
     }
 }
 
-export default DeckDetail
+const mapStateToProps = (state, props) => {
+    return {
+        deck:  state[props.navigation.state.params.title]
+    }
+};
+
+
+export default connect(
+    mapStateToProps,
+    null
+)(DeckDetail)
+
 
 const styles = StyleSheet.create({
     container: {

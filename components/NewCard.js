@@ -68,7 +68,7 @@ class NewCard extends Component {
                 deckId: this.state.deck,
                 isCorrect: this.state.isCorrect
             }).then(() => {
-                navigate('Decks', {})
+                navigate('DeckDetail', {title: this.state.deck});
             })
         }
     };
