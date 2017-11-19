@@ -15,6 +15,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
   * [npm run ios](#npm-run-ios)
   * [npm run android](#npm-run-android)
   * [npm run eject](#npm-run-eject)
+* [Additional Information](#additional-information)
 
 
 
@@ -52,4 +53,11 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 #### `npm run android`
 
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of `adb` available to Create React Native App:
+
+
+## Additional Information
+
+* The "start quiz" button is only available when there is at least 1 Card in the deck.
+* The fields title when creating a Deck is required. There is a validation.
+* The fields question and answer when creating a Card are required. There is a validation.
 
